@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
         <div class="container-fluid px-4">
             <a class="navbar-brand font-weight-bold text-success" href="{{ route('admin.dashboard') }}">
-                <i class="fa-solid fa-paw"></i> AUSSIE BREEDING
+                <i class="fa-solid fa-paw"></i> STARBOUND KENNEL
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -28,6 +28,11 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active fw-bold' : '' }}" href="{{ route('admin.dashboard') }}">
                             <i class="fa-solid fa-chart-pie me-1"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('admin.adults.*') ? 'active fw-bold' : '' }}" href="{{ route('admin.adults.index') }}">
+                            <i class="fa-solid fa-dog me-1"></i> Adulti
                         </a>
                     </li>
                     <li class="nav-item">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdultController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LitterController;
 use App\Http\Controllers\Admin\PuppyController;
@@ -20,6 +21,7 @@ Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::resource('adults', AdultController::class);
         Route::resource('litters', LitterController::class);
         Route::resource('puppies', PuppyController::class);
     });
