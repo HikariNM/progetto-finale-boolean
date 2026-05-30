@@ -121,8 +121,6 @@
                 </div>
 
                 <div class="card shadow-sm border-0 p-4 mb-4">
-                    {{-- <h4 class="fw-bold text-secondary mb-3">Foto del Cane</h4> --}}
-                    
                     <div class="mb-2">
                         <label for="image" class="form-label fw-semibold small text-muted">Seleziona un'immagine (Opzionale)</label>
                         <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">

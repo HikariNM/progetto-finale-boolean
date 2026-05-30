@@ -16,10 +16,10 @@ return new class extends Migration
             $table->foreignId('litter_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('gender');
-            $table->string('color');
+            $table->string('color')->nullable();;
             $table->string('status')->default('Disponibile');
             $table->text('description')->nullable();
-            $table->string('cover_image')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('puppies');
     }
 };

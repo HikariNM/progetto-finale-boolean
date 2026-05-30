@@ -115,8 +115,8 @@
                     <div class="mb-4">
                         <label for="status" class="form-label fw-semibold">Stato Attuale *</label>
                         <select class="form-select @error('status') is-invalid @enderror" id="status" name="status" required>
-                            <option value="Attivo" {{ old('status', 'Attivo') === 'Attivo' ? 'selected' : '' }}>Attivo (Riproduttore)</option>
-                            <option value="Ritirato" {{ old('status') === 'Ritirato' ? 'selected' : '' }}>Ritirato / Pensionato</option>
+                            <option value="Attivo" {{ old('status', 'Attivo', $adult->status) === 'Attivo' ? 'selected' : '' }}>Attivo (Riproduttore)</option>
+                            <option value="Ritirato" {{ old('status', $adult->status) === 'Ritirato' ? 'selected' : '' }}>Ritirato / Pensionato</option>
                         </select>
                         @error('status')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -124,14 +124,12 @@
                     </div>
 
                     <div class="form-check form-switch mb-3">
-                        <input class="form-check-input" type="checkbox" id="is_neutered" name="is_neutered" value="1" {{ old('is_neutered') ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="is_neutered" name="is_neutered" value="1" {{ old('is_neutered', $adult->is_neutered) ? 'checked' : '' }}>
                         <label class="form-check-label fw-semibold" for="is_neutered">Sterilizzato / Castrato</label>
                     </div>
                 </div>
 
-                <div class="card shadow-sm border-0 p-4 mb-4">
-                    {{-- <h4 class="fw-bold text-secondary mb-3">Foto del Cane</h4> --}}
-                    
+                <div class="card shadow-sm border-0 p-4 mb-4">                    
                     <div class="mb-2">
                         <label for="image" class="form-label fw-semibold small text-muted">Seleziona un'immagine (Opzionale)</label>
                         <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">
@@ -140,11 +138,16 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-            
+                    <input type="hidden" id="remove_image" name="remove_image" value="0">
                     @if(isset($adult) && $adult->image)
-                        <div class="mt-3 pt-3 border-top text-center">
+                        <div class="mt-3 pt-3 border-top text-center" id="preview-image-container">
                             <p class="small text-muted mb-2 fw-semibold">Foto attuale:</p>
                             <img src="{{ asset('storage/' . $adult->image) }}" alt="Foto {{ $adult->name }}" class="img-thumbnail shadow-sm" style="max-height: 150px; object-fit: cover;">
+                            <div class="mt-2">
+                                <button type="button" class="btn btn-sm btn-outline-danger rounded-pill px-3" id="btn-remove-image">
+                                    <i class="fa-solid fa-trash-can me-1"></i> Rimuovi foto attuale
+                                </button>
+                            </div>
                         </div>
                     @endif
                 </div>
@@ -170,10 +173,12 @@
         const addButton = document.getElementById('add-title-btn');
         const isNeuteredCheckbox = document.getElementById('is_neutered');
         const statusSelect = document.getElementById('status');
+        const btnRemove = document.getElementById('btn-remove-image');
+        const inputRemove = document.getElementById('remove_image');
+        const containerPreview = document.getElementById('preview-image-container');
 
         /**
-         * 
-         * Appends a new input field row when the "Aggiungi Titolo" button is clicked.
+         * * Appends a new input field row when the "Aggiungi Titolo" button is clicked.
          * The name="titles[]" syntax groups these inputs into a single PHP array upon submission.
          */
         addButton.addEventListener('click', function () {
@@ -188,7 +193,7 @@
         });
 
         /**
-         *  INPUT REMOVAL (Event Delegation)
+         * INPUT REMOVAL (Event Delegation)
          * Listens to clicks on the wrapper and deletes the specific row if a remove button is triggered.
          * Event delegation is required since these buttons are generated dynamically at runtime.
          */
@@ -202,7 +207,7 @@
         });
 
         /**
-         *  Neutered Switch -> Status Select
+         * Neutered Switch -> Status Select
          * If the user marks the dog as "Sterilizzato" (Neutered), the breeding status 
          * automatically switches to "Ritirato" (Retired) since neutered dogs cannot breed
          */
@@ -213,7 +218,7 @@
         });
 
         /**
-         *  Status Select -> Neutered Switch (Bidirectional Control)
+         * Status Select -> Neutered Switch (Bidirectional Control)
          * Reversing the choice: If the status is manually set back to "Attivo"
          * the "Sterilizzato" switch is forced back to false (unchecked)
          */
@@ -222,6 +227,15 @@
                 isNeuteredCheckbox.checked = false;
             }
         });
+
+        if (btnRemove && containerPreview) {
+            btnRemove.addEventListener('click', function() {
+                // 1 Set idden value a 1 (input to delete)
+                inputRemove.value = "1";
+                // 2 Hide the preview
+                containerPreview.style.display = 'none';
+            });
+        }
     });
 </script>
 @endsection

@@ -96,9 +96,9 @@ class AdultController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Adult $adult)
     {
-        //
+        return view('admin.adults.show', compact('adult'));
     }
 
     /**
@@ -128,14 +128,14 @@ class AdultController extends Controller
             'titles' => ['nullable', 'array'],
             // 'titles.*' validate EACH SINGLE ELEMENT inside the 'titles' array.
             // It ensures that every dynamically added title is a safe string and under 255 characters.
-            'title' => ['nullable', 'string', 'max:255']
+            'titles.*' => ['nullable', 'string', 'max:255']
         ]);
 
         $data = $request->all();
 
         // dd($data);
 
-        // ATTRIBUTE MAPPING
+        // ATTRIBUTE UPDATE
         $adult->name = $data['name'];
         $adult->gender = $data['gender'];
         $adult->breed = $data['breed'];
@@ -152,7 +152,13 @@ class AdultController extends Controller
             }
             $img_url = Storage::putFile('studDogs', $request->image);
             $adult->image = $img_url;
+        } elseif ($request->input('remove_image') == '1') {
+            if ($adult->image) {
+                Storage::delete($adult->image);
+            }
+            $adult->image = null;
         }
+
 
         $adult->save();
 
@@ -183,7 +189,7 @@ class AdultController extends Controller
             }
         }
 
-        return redirect()->route('admin.adults.index');
+        return redirect()->route('admin.adults.show', $adult);
     }
 
     /**

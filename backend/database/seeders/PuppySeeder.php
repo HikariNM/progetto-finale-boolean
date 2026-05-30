@@ -19,13 +19,15 @@ class PuppySeeder extends Seeder
         $litters = Litter::all();
 
         foreach ($litters as $litter) {
-            for ($j = 0; $j < $litter->puppies_count; $j++) {
+
+            $randomPuppiesCount = rand(3, 6);
+            for ($i = 0; $i < $randomPuppiesCount; $i++) {
                 $newPuppy = new Puppy();
                 $newPuppy->litter_id = $litter->id;
                 $newPuppy->name = $faker->firstName();
                 $newPuppy->gender = $faker->randomElement(['Maschio', 'Femmina']);
                 $newPuppy->color = $faker->randomElement(['BlackTricolor', 'BlueMerle', 'RedMerle', 'RedTricolor']);
-                $newPuppy->status = 'Disponibile';
+                $newPuppy->status = $faker->randomElement(['Disponibile', 'Prenotato', 'Venduto']);
 
                 $newPuppy->save();
             }

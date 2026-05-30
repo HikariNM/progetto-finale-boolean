@@ -10,4 +10,15 @@ class Adult extends Model
     {
         return $this->hasMany(Title::class);
     }
+
+    public function littersAsMother()
+    {
+        return $this->hasMany(Litter::class, 'mother_id');
+    }
+
+    // Se l'adulto è un maschio
+    public function littersAsFather()
+    {
+        return $this->hasMany(Litter::class, 'father_id');
+    }
 }

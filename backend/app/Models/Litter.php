@@ -10,4 +10,14 @@ class Litter extends Model
     {
         return $this->hasMany(Puppy::class);
     }
+
+    public function mother()
+    {
+        return $this->belongsTo(Adult::class, 'mother_id');
+    }
+
+    public function father()
+    {
+        return $this->belongsTo(Adult::class, 'father_id');
+    }
 }
