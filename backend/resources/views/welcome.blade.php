@@ -2,31 +2,25 @@
 
 @section('content')
     <div class="p-5 mb-5 bg-dark text-white rounded-4 shadow-sm relative overflow-hidden" 
-         style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=1974&auto=format&fit=crop') center/cover no-repeat;">
+        style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=1974&auto=format&fit=crop') center/cover no-repeat;">
         <div class="container-fluid py-4">
-            <span class="badge bg-success px-3 py-2 rounded-pill text-uppercase fw-bold mb-3 tracking-wider">
-                Vetrina Allevamento Professional
+            <span class="badge bg-light text-black px-3 py-2 rounded-pill text-uppercase fw-bold mb-3 tracking-wider">
+                Pannello amministrativo
             </span>
-            <h1 class="display-4 fw-bold mb-3">Passione per il Breeding,<br>Eccellenza Digitale</h1>
+            <h1 class="display-4 fw-bold mb-3">Starbound Kennel</h1>
             <p class="col-md-8 lead text-white-50 mb-4">
-                Benvenuto in Breeding Pro, la piattaforma integrata per tracciare le linee di sangue, monitorare la salute dei cuccioli e gestire il tuo allevamento cinofilo con un solo click.
+                Gestisci le linee di sangue, monitora le cucciolate e i relativi cuccioli con un solo click.
             </p>
             
             <div class="d-flex gap-3 flex-wrap">
-                @auth
-                    <a href="{{ route('admin.dashboard') }}" class="btn btn-success btn-lg px-4 shadow-sm">
-                        <i class="fa-solid fa-gauge me-2"></i>Vai alla Dashboard
-                    </a>
-                @else
-                    <a href="{{ route('login') }}" class="btn btn-success btn-lg px-4 shadow-sm">
+                    <a href="{{ route('login') }}" class="btn btn-light btn-lg px-4 shadow-sm">
                         <i class="fa-solid fa-right-to-bracket me-2"></i>Accedi al Pannello
                     </a>
-                    @if (Route::has('register'))
+                    {{-- @if (Route::has('register'))
                         <a href="{{ route('register') }}" class="btn btn-outline-light btn-lg px-4">
                             Registrati come Operatore
                         </a>
-                    @endif
-                @endauth
+                    @endif --}}
             </div>
         </div>
     </div>
@@ -35,7 +29,7 @@
         <div class="col-12 col-md-4">
             <div class="card h-100 border-0 shadow-sm p-3">
                 <div class="card-body text-center">
-                    <div class="text-success fs-1 mb-3">
+                    <div class="text-purple fs-1 mb-3">
                         <i class="fa-solid fa-folder-open"></i>
                     </div>
                     <h5 class="card-title fw-bold">Albero Genealogico</h5>
@@ -47,7 +41,7 @@
         <div class="col-12 col-md-4">
             <div class="card h-100 border-0 shadow-sm p-3">
                 <div class="card-body text-center">
-                    <div class="text-success fs-1 mb-3">
+                    <div class="text-purple fs-1 mb-3">
                         <i class="fa-solid fa-dog"></i>
                     </div>
                     <h5 class="card-title fw-bold">Anagrafica Cuccioli</h5>
@@ -59,7 +53,7 @@
         <div class="col-12 col-md-4">
             <div class="card h-100 border-0 shadow-sm p-3">
                 <div class="card-body text-center">
-                    <div class="text-success fs-1 mb-3">
+                    <div class="text-purple fs-1 mb-3">
                         <i class="fa-solid fa-heart"></i>
                     </div>
                     <h5 class="card-title fw-bold">Statistiche Integrate</h5>

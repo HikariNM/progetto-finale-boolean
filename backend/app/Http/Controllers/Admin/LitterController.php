@@ -132,7 +132,7 @@ class LitterController extends Controller
 
         $litter->update();
 
-        return redirect()->route('admin.litters.index');
+        return redirect()->route('admin.litters.show', $litter);
     }
 
     /**
@@ -140,6 +140,9 @@ class LitterController extends Controller
      */
     public function destroy(Litter $litter)
     {
+        if ($litter->image) {
+            Storage::delete($litter->image);
+        }
         $litter->delete();
 
         return redirect()->route('admin.litters.index');

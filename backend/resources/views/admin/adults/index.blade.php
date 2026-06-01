@@ -6,7 +6,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="fw-bold text-dark m-0">Registro Cani Adulti</h1>
-            <p class="text-muted m-0">Gestisci l'anagrafica dei riproduttori e la loro bacheca trofei.</p>
+            <p class="text-muted m-0">Gestisci l'anagrafica dei riproduttori e la loro bacheca trofei</p>
         </div>
         <a href="{{ route('admin.adults.create') }}" class="btn btn-primary shadow-sm">
             Aggiungi Cane 
@@ -72,7 +72,7 @@
 
                                     @if($adult->is_neutered)
                                         <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-2" title="Castrato/Sterilizzato">
-                                            <i class="fa-solid fa-scissors small"></i> Sterilizzato
+                                            Sterilizzato
                                         </span>
                                     @endif
                                 </td>
@@ -139,29 +139,5 @@
         </div>
     </div>
 
-</div>
-
-
-
-<div class="modal fade" id="deleteAdultModal {{ $adult->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to permanently delete this dog info?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <form action="{{ route('admin.adults.destroy', $adult) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" class="btn btn-danger" value="Delete">
-                </form> 
-            </div>
-        </div>
-    </div>
 </div>
 @endsection

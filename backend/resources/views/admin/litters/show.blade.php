@@ -3,15 +3,28 @@
 @section('content')
 <div class="container py-4">
     
-    <div class="mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
         <a href="{{ route('admin.adults.index') }}" class="btn btn-sm btn-outline-secondary mb-2">
             Torna al registro
         </a>
+        <div class="btn-group shadow-sm" role="group">
+            <a href="{{ route('admin.litters.edit', $litter) }}" class="btn btn-white border fw-semibold">
+                <i class="fa-solid fa-pen text-secondary me-1"></i> Modifica
+            </a>
+            <button type="button" class="btn btn-white border text-danger fw-semibold" data-bs-toggle="modal" data-bs-target="#deleteAdultModal{{ $litter->id }}">
+                <i class="fa-solid fa-trash-can me-1"></i> Elimina
+            </button>
+        </div>
     </div>
 
     <div class="row">
         <div class="col-lg-4 mb-4">
             <div class="card shadow-sm border-0 mb-4">
+                @if($litter->image)
+                    <div class="mb-3">
+                        <img src="{{ asset('storage/' . $litter->image) }}" alt="Foto {{ $litter->name }}" class="img-fluid rounded shadow-sm border" style="max-height: 250px; width: 100%; object-fit: cover;">
+                    </div>
+                    @endif
                 <div class="card-body p-4">
                     <span class="badge @if($litter->status === 'Nata') bg-success @elseif($litter->status === 'Svezzata') bg-info @else bg-warning text-dark @endif rounded-pill px-3 mb-2">
                         {{ $litter->status }}
@@ -62,11 +75,11 @@
                 <div class="card-header bg-white border-0 p-4 d-flex justify-content-between align-items-center">
                     <div>
                         <h4 class="fw-bold text-dark m-0">Componenti della Cucciolata</h4>
-                        <p class="text-muted small m-0">Lista dei singoli cuccioli nati da questo accoppiamento.</p>
+                        <p class="text-muted small m-0">Lista dei singoli cuccioli nati da questo accoppiamento</p>
                     </div>
-                    <a href="{{ route('admin.puppies.create', ['litter_id' => $litter->id]) }}" class="btn btn-sm btn-primary shadow-sm px-3">
+                    <button type="button" class="btn btn-sm btn-primary shadow-sm px-3" title="Elimina" data-bs-toggle="modal" data-bs-target="#addPuppyModal">
                         Aggiungi Cucciolo
-                    </a>
+                    </button> 
                 </div>
                 <div class="card-body p-0 border-top">
                     <div class="table-responsive">
@@ -110,11 +123,41 @@
                                             @endif
                                         </td>
                                         <td class="text-center pe-4">
+                                            <a href="{{ route('admin.puppies.show', $puppy->id) }}" class="btn btn-sm btn-outline-secondary" title="Vedi Dettagli">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
                                             <a href="{{ route('admin.puppies.edit', $puppy) }}" class="btn btn-sm btn-outline-secondary" title="Modifica Cucciolo">
                                                 <i class="fa-solid fa-pen"></i>
                                             </a>
+                                            <button type="button" class="btn btn-sm btn-outline-danger" title="Elimina" data-bs-toggle="modal" data-bs-target="#deletePuppyModal{{ $puppy->id }}">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </button>
                                         </td>
                                     </tr>
+
+                                    {{-- DELETE PUPPY MODAL --}}
+                                    <div class="modal fade" id="deletePuppyModal{{ $puppy->id }}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content border-0 shadow">
+                                                <div class="modal-header border-0">
+                                                    <h5 class="modal-title fw-bold">Elimina Cucciolo</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body text-start">
+                                                    Sei sicuro di voler eliminare permanentemente il cucciolo <strong>{{ $puppy->name }}</strong>?<br>
+                                                    <span class="text-danger fw-semibold"><i class="fa-solid fa-triangle-ex some me-1"></i> Attenzione: Questo eliminerà definitivamente il cucciolo!</span>
+                                                </div>
+                                                <div class="modal-footer border-0">
+                                                    <button type="button" class="btn btn-light rounded-pill" data-bs-dismiss="modal">Chiudi</button>
+                                                    <form action="{{ route('admin.puppies.destroy', $puppy) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger rounded-pill px-4">Elimina</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @empty
                                     <tr>
                                         <td colspan="5" class="text-center py-5 text-muted">
@@ -128,6 +171,70 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+{{-- ADD PUPPY MODAL --}}
+<div class="modal fade" id="addPuppyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">Aggiungi Nuovo Cucciolo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('admin.puppies.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body text-start">
+                    <input type="hidden" name="litter_id" value="{{ $litter->id }}">
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Nome</label>
+                        <input type="text" name="name" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Sesso</label>
+                        <select name="gender" class="form-select" required>
+                            <option value="Maschio">Maschio</option>
+                            <option value="Femmina">Femmina</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Colore Mantello</label>
+                        <input type="text" name="color" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Stato Vendita</label>
+                        <select name="status" class="form-select" required>
+                            <option value="Disponibile">Disponibile</option>
+                            <option value="Prenotato">Prenotato</option>
+                            <option value="Venduto">Venduto</option>
+                        </select>
+                    </div>
+                    <div class="card shadow-sm border-0 p-4 mb-4">
+                        <div class="mb-2">
+                            <label for="image" class="form-label fw-semibold small text-muted">Seleziona un'immagine (Opzionale)</label>
+                            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">
+                            <small class="text-muted d-block mt-1" style="font-size: 0.75rem;">Formati accettati: JPG, JPEG, PNG. Max 2MB.</small>
+                            @error('image')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Note</label>
+                        <textarea name="description" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-light rounded-pill" data-bs-dismiss="modal">Chiudi</button>
+                    <button type="submit" class="btn btn-success rounded-pill px-4">Salva Cucciolo</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -8,7 +8,7 @@
             Torna al registro
         </a>
         <h1 class="fw-bold text-dark m-0">Registra Nuovo Cane Adulto</h1>
-        <p class="text-muted m-0">Inserisci i dati anagrafici e gli eventuali titoli conseguiti.</p>
+        <p class="text-muted m-0">Inserisci i dati anagrafici e gli eventuali titoli conseguiti</p>
     </div>
 
     <form action="{{ route('admin.adults.update', $adult) }}" method="POST" class="needs-validation" enctype="multipart/form-data">

@@ -12,7 +12,7 @@
     <div class="card shadow-sm border-0 p-4" style="max-width: 850px; margin: 0 auto;">
         <div class="mb-4">
             <h2 class="fw-bold text-dark m-0">Registra Nuova Cucciolata</h2>
-            <p class="text-muted m-0">Registra un nuovo accoppiamento programmato o una nascita avvenuta.</p>
+            <p class="text-muted m-0">Registra un nuovo accoppiamento programmato o una nascita avvenuta</p>
         </div>
 
         <form action="{{ route('admin.litters.store') }}" method="POST" enctype="multipart/form-data">

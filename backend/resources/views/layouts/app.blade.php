@@ -15,16 +15,16 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
         <div class="container-fluid px-4">
-            <a class="navbar-brand font-weight-bold text-success" href="{{ route('admin.dashboard') }}">
-                <i class="fa-solid fa-paw"></i> STARBOUND KENNEL
+            <a class="navbar-brand fw-bold" href="{{ route('admin.dashboard') }}">
+                STARBOUND KENNEL
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
+                    @auth
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active fw-bold' : '' }}" href="{{ route('admin.dashboard') }}">
                             <i class="fa-solid fa-chart-pie me-1"></i> Dashboard
@@ -45,12 +45,16 @@
                             <i class="fa-solid fa-dog me-1"></i> Cuccioli Anagrafica
                         </a>
                     </li>
+                    @endauth
                 </ul>
 
                 <div class="d-flex align-items-center gap-3">
                     @auth
-                        <span class="text-light small">
+                        {{-- <span class="text-light small">
                             <i class="fa-solid fa-user me-1 text-muted"></i> {{ Auth::user()?->name }}
+                        </span> --}}
+                        <span>
+                            <a class="text-light text-decoration-none" href="{{ url('profile') }}">{{ Auth::user()?->name }}</a>
                         </span>
                         <form method="POST" action="{{ route('logout') }}" class="m-0">
                             @csrf
@@ -61,10 +65,10 @@
                     @endauth
 
                     @guest
-                        <a href="{{ route('login') }}" class="btn btn-sm btn-success">
+                        <a href="{{ route('login') }}" class="btn btn-sm btn-light">
                             Accedi
                         </a>
-                        <a href="{{ route('register') }}" class="btn btn-sm btn-success">
+                        <a href="{{ route('register') }}" class="btn btn-sm btn-light">
                             Registrati
                         </a>
                     @endguest

@@ -6,7 +6,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="fw-bold text-dark m-0">Registro Cucciolate</h1>
-            <p class="text-muted m-0">Gestisci i cicli riproduttivi, gli accoppiamenti e monitora le nascite.</p>
+            <p class="text-muted m-0">Gestisci i cicli riproduttivi, gli accoppiamenti e monitora le nascite</p>
         </div>
         <a href="{{ route('admin.litters.create') }}" class="btn btn-primary shadow-sm">
             Nuova Cucciolata

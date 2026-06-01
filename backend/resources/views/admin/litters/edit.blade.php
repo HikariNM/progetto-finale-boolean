@@ -12,7 +12,7 @@
     <div class="card shadow-sm p-4 border-0" style="max-width: 850px; margin: 0 auto;">
         <div class="mb-4">
             <h2 class="fw-bold text-dark m-0">Modifica Cucciolata</h2>
-            <p class="text-muted m-0">Aggiorna le informazioni o cambia lo stato del ciclo riproduttivo.</p>
+            <p class="text-muted m-0">Aggiorna le informazioni o cambia lo stato del ciclo riproduttivo</p>
         </div>
 
         <form action="{{ route('admin.litters.update', $litter) }}" method="POST" enctype="multipart/form-data">

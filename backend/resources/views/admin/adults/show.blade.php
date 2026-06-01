@@ -16,7 +16,7 @@
                     <span class="text-danger fs-3 ms-1"><i class="fa-solid fa-venus"></i></span>
                 @endif
             </h1>
-            <p class="text-muted m-0">Scheda informativa dettagliata del riproduttore.</p>
+            <p class="text-muted m-0">Scheda informativa dettagliata del riproduttore</p>
         </div>
         
         <div class="btn-group shadow-sm" role="group">

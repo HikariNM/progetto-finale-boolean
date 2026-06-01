@@ -12,7 +12,7 @@ Route::get('/', function () {
     if (Auth::check()) {
         return redirect()->route('admin.dashboard');
     }
-    return redirect()->route('login');
+    return view('welcome');
 });
 
 

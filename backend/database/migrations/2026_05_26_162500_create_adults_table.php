@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('breed');
             $table->date('birth_date');
             $table->string('microchip')->unique()->nullable();
-            $table->string('pedigree_code')->nullable();
+            $table->string('pedigree_code')->nullable()->unique();
             $table->string('status')->default('Attivo');
             $table->boolean('is_neutered')->default(false);
             $table->timestamps();

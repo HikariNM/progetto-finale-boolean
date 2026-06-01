@@ -45,7 +45,7 @@ class AdultController extends Controller
             'breed' => ['required', 'string', 'max:255'],
             'birth_date' => ['required', 'date'],
             'microchip' => ['nullable', 'string', 'size:15', 'unique:adults,microchip'],
-            'pedigree_code' => ['nullable', 'string', 'max:35'],
+            'pedigree_code' => ['nullable', 'string', 'max:35', 'unique:adults,pedigree_code'],
             'status' => ['required', 'string', 'in:Attivo,Ritirato'],
             'is:neutered' => ['nullable', 'boolean'],
             'titles' => ['nullable', 'array'],
@@ -122,7 +122,7 @@ class AdultController extends Controller
             'breed' => ['required', 'string', 'max:255'],
             'birth_date' => ['required', 'date'],
             'microchip' => ['nullable', 'string', 'size:15', 'unique:adults,microchip,' . $adult->id],
-            'pedigree_code' => ['nullable', 'string', 'max:35'],
+            'pedigree_code' => ['nullable', 'string', 'max:35', 'unique:adults,pedigree_code,' . $adult->id],
             'status' => ['required', 'string', 'in:Attivo,Ritirato'],
             'is:neutered' => ['nullable', 'boolean'],
             'titles' => ['nullable', 'array'],
@@ -197,6 +197,9 @@ class AdultController extends Controller
      */
     public function destroy(Adult $adult)
     {
+        if ($adult->image) {
+            Storage::delete($adult->image);
+        }
         $adult->titles()->delete();
         $adult->delete();
         return redirect()->route('admin.adults.index');
