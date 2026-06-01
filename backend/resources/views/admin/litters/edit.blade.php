@@ -4,8 +4,8 @@
 <div class="container py-4">
     
     <div class="mb-4">
-        <a href="{{ route('admin.litters.index') }}" class="text-decoration-none text-secondary small fw-bold">
-            <i class="fa-solid fa-arrow-left me-1"></i> Annulla modifiche
+        <a href="{{ route('admin.litters.index') }}" class="btn btn-sm btn-outline-secondary mb-2">
+            Torna al registro
         </a>
     </div>
 

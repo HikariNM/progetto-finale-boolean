@@ -4,7 +4,7 @@
 <div class="container py-4">
     <div class="mb-4">
         <a href="{{ route('admin.litters.index') }}" class="btn btn-sm btn-outline-secondary mb-2">
-            Annulla e torna al registro delle cucciolate
+            Torna al registro
         </a>
     </div>
 
