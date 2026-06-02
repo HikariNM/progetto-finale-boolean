@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 export default function LitterCard({ litter, index, isUpcoming }) {
     return (
         <section
@@ -13,7 +14,9 @@ export default function LitterCard({ litter, index, isUpcoming }) {
             </div>
 
             <div className="col-md-6">
-                <h2 className="fw-bold text-uppercase mb-2">{litter.title}</h2>
+                <Link to={`/cucciolate/${litter.id}`} className="text-decoration-none text-dark" >
+                    <h2 className="fw-bold text-uppercase mb-2">{litter.title}</h2>
+                </Link>
                 <h5 className="text-muted mb-3">{litter.father?.name} x {litter.mother?.name}</h5>
 
                 <p className="text-secondary">

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function AdultCard({ adult, index }) {
     return (
         <section
@@ -13,12 +15,14 @@ export default function AdultCard({ adult, index }) {
             </div>
 
             <div className="col-md-6">
-                <h2 className="fw-bold text-uppercase mb-2">{adult.name}</h2>
+                <Link to={`/i-nostri-cani/${adult.id}`} className="text-decoration-none text-dark" >
+                    <h2 className="fw-bold text-uppercase mb-2">{adult.name}</h2>
+                </Link>
                 <h5 className="text-muted mb-3">{adult.breed}</h5>
 
-                <p className="text-secondary">
+                {/* <p className="text-secondary">
                     {adult.description}
-                </p>
+                </p> */}
 
                 <div className="border-top pt-3 mt-3 text-secondary">
                     <p className="mb-1 small"><strong>Titoli:</strong> {adult.titles?.map(t => t.name).join(', ') || 'Nessun titolo'}</p>
