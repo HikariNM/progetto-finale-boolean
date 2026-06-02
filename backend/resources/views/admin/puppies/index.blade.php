@@ -31,6 +31,7 @@
                             <th>Cucciolata</th>
                             <th>Data di nascita</th>
                             <th>Colore</th>
+                            <th>Coda</th>
                             <th>Stato</th>
                             <th class="text-center pe-4">Azioni</th>
                         </tr>
@@ -62,7 +63,10 @@
                                 </td>
                                 
                                 <td class="text-secondary">
-                                    {{ $puppy->color ?? 'Non specificato' }}
+                                    {{ $puppy->coat_color ?? 'Non specificato' }}
+                                </td>
+                                <td class="text-secondary">
+                                    {{ $puppy->tail_type ?? 'Non specificato' }}
                                 </td>
                                 
                                 <td>

@@ -53,7 +53,8 @@ class PuppyController extends Controller
             'litter_id'            => ['required', 'exists:litters,id'],
             'name'                 => ['required', 'string', 'max:255'],
             'gender'               => ['required', 'string', 'in:Maschio,Femmina'],
-            'color'                => ['nullable', 'string', 'max:255'],
+            'coat_color'           => ['nullable', 'string', 'in:Black Tricolor,Red Tricolor,Blue Merle,Red Merle'],
+            'tail_type' => ['nullable', 'string', 'in:NBT,Coda lunga'],
             'status'               => ['required', 'string', 'in:Disponibile,Prenotato,Venduto'],
             'description'          => ['nullable', 'string'],
             'image'                => ['nullable', 'image', 'max:2048']
@@ -67,7 +68,8 @@ class PuppyController extends Controller
         $puppy->litter_id = $data['litter_id'];
         $puppy->name = $data['name'];
         $puppy->gender  = $data['gender'];
-        $puppy->color  = $data['color'];
+        $puppy->coat_color  = $data['coat_color'];
+        $puppy->tail_type  = $data['tail_type'];
         $puppy->status = $data['status'];
         $puppy->description = $data['description'];
 
@@ -117,7 +119,8 @@ class PuppyController extends Controller
             'litter_id'            => ['required', 'exists:litters,id'],
             'name'                 => ['required', 'string', 'max:255'],
             'gender'               => ['required', 'string', 'in:Maschio,Femmina'],
-            'color'                => ['nullable', 'string', 'max:255'],
+            'coat_color'           => ['nullable', 'string', 'in:Black Tricolor,Red Tricolor,Blue Merle,Red Merle'],
+            'tail_type'            => ['nullable', 'string', 'in:NBT,Coda lunga'],
             'status'               => ['required', 'string', 'in:Disponibile,Prenotato,Venduto'],
             'description'          => ['nullable', 'string'],
             'image'                => ['nullable', 'image', 'max:2048']
@@ -127,7 +130,8 @@ class PuppyController extends Controller
         $puppy->litter_id = $data['litter_id'];
         $puppy->name = $data['name'];
         $puppy->gender  = $data['gender'];
-        $puppy->color  = $data['color'];
+        $puppy->coat_color  = $data['coat_color'];
+        $puppy->tail_type  = $data['tail_type'];
         $puppy->status = $data['status'];
         $puppy->description = $data['description'];
 

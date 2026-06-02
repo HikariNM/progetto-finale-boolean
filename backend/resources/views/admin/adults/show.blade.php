@@ -70,6 +70,14 @@
                             <span class="text-dark fw-bold">{{ $adult->breed }}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between py-3">
+                            <span class="text-muted fw-semibold">Colore manto:</span>
+                            <span class="text-dark fw-bold">{{ $adult->coat_color}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between py-3">
+                            <span class="text-muted fw-semibold">Coda:</span>
+                            <span class="text-dark fw-bold">{{ $adult->tail_type }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between py-3">
                             <span class="text-muted fw-semibold">Codice Microchip:</span>
                             <span class="text-dark fw-mono font-monospace fw-bold">{{ $adult->microchip }}</span>
                         </li>

@@ -28,7 +28,7 @@
                     <div>
                         <h6 class="text-muted text-uppercase small mb-1">Cani Adulti</h6>
                         <h3 class="display-6 fw-bold text-dark mb-2">{{ $totalAdult }}</h3>
-                        <a href="{{ route('admin.litters.index') }}" class="text-muted text-decoration-none small fw-bold">Gestisci</a>
+                        <a href="{{ route('admin.adults.index') }}" class="text-muted text-decoration-none small fw-bold">Gestisci</a>
                     </div>
                     <div class="bg-secondary bg-opacity-10 text-secondary rounded p-3 fs-3">
                         <i class="fa-solid fa-dog"></i>

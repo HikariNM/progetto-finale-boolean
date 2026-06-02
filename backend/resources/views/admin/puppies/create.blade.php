@@ -43,9 +43,28 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="text-uppercase fs-7 text-secondary fw-bold mb-2 d-block">Colore Mantello</label>
-                        <input type="text" name="color" class="form-control @error('color') is-invalid @enderror" value="{{old('color')}}">
-                        @error('color') <div class="invalid-feedback fw-semibold">{{ $message }}</div> @enderror
+                        <label for="coat_color" class="text-uppercase fs-7 text-secondary fw-bold mb-2 d-block">Colore Mantello</label>
+                        <select class="form-select @error('coat_color') is-invalid @enderror" id="coat_color" name="coat_color" required>
+                            <option value="" selected disabled>Seleziona il colore del mantello...</option>
+                            <option value="Black Tricolor" {{ old('coat_color') === 'Black Tricolor' ? 'selected' : '' }}>Black Tricolor</option>
+                            <option value="Red Tricolor" {{ old('coat_color') === 'Red Tricolor' ? 'selected' : '' }}>Red Tricolor</option>
+                            <option value="Blue Merle" {{ old('coat_color') === 'Blue Merle' ? 'selected' : '' }}>Blue Merle</option>
+                            <option value="Red Merle" {{ old('coat_color') === 'Red Merle' ? 'selected' : '' }}>Red Merle</option>
+                        </select>
+                        @error('coat_color')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="tail_type" class="text-uppercase fs-7 text-secondary fw-bold mb-2 d-block">Coda</label>
+                        <select class="form-select @error('tail_type') is-invalid @enderror" id="tail_type" name="tail_type" required>
+                            <option value="" selected disabled>Seleziona la coda...</option>
+                            <option value="NBT" {{ old('tail_type') === 'NBT' ? 'selected' : '' }}>NBT</option>
+                            <option value="Coda lunga" {{ old('tail_type') === 'Coda lunga' ? 'selected' : '' }}>Coda lunga</option>
+                        </select>
+                        @error('tail_type')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="mb-3">

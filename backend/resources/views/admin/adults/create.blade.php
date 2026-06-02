@@ -56,6 +56,30 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="coat_color" class="form-label fw-semibold">Colore Mantello</label>
+                            <select class="form-select @error('coat_color') is-invalid @enderror" id="coat_color" name="coat_color" required>
+                                <option value="" selected disabled>Seleziona il colore del mantello...</option>
+                                <option value="Black Tricolor" {{ old('coat_color') === 'Black Tricolor' ? 'selected' : '' }}>Black Tricolor</option>
+                                <option value="Red Tricolor" {{ old('coat_color') === 'Red Tricolor' ? 'selected' : '' }}>Red Tricolor</option>
+                                <option value="Blue Merle" {{ old('coat_color') === 'Blue Merle' ? 'selected' : '' }}>Blue Merle</option>
+                                <option value="Red Merle" {{ old('coat_color') === 'Red Merle' ? 'selected' : '' }}>Red Merle</option>
+                            </select>
+                            @error('coat_color')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="tail_type" class="form-label fw-semibold">Coda</label>
+                            <select class="form-select @error('tail_type') is-invalid @enderror" id="tail_type" name="tail_type" required>
+                                <option value="" selected disabled>Seleziona la coda...</option>
+                                <option value="NBT" {{ old('tail_type') === 'NBT' ? 'selected' : '' }}>NBT</option>
+                                <option value="Coda lunga" {{ old('tail_type') === 'Coda lunga' ? 'selected' : '' }}>Coda lunga</option>
+                            </select>
+                            @error('tail_type')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
                         <div class="col-12 col-sm-6">
                             <label for="microchip" class="form-label fw-semibold">Codice Microchip </label>
@@ -72,6 +96,10 @@
                             @error('pedigree_code')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                        </div>
+                        <div class="col-12">
+                            <label for="description" class="form-label fw-semibold">Descrizione (Opzionale)</label>
+                            <textarea class="form-control" id="description" name="description" rows="4" placeholder="Inserisci una breve descrizione del cane con le sue caratteristiche.">{{ old('description') }}</textarea>
                         </div>
                     </div>
                 </div>

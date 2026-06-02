@@ -36,6 +36,9 @@ class AdultSeeder extends Seeder
             $newAdult->birth_date = $faker->date('Y-m-d', '-2 years');
             $newAdult->microchip = $faker->unique()->numerify('###############');
             $newAdult->pedigree_code = 'LOI' . $faker->unique()->numerify('######');
+            $newAdult->coat_color = $faker->randomElement(['Black Tricolor', 'Red Tricolor', 'Blue Merle', 'Red Merle']);
+            $newAdult->tail_type = $faker->randomElement(['NBT', 'Coda lunga']);
+            $newAdult->description = $faker->paragraphs(2, true);
             $newAdult->status = $tableStatus;
             $newAdult->is_neutered = ($tableStatus === 'Ritirato') ? $faker->boolean(80) : $faker->boolean(10);
 

@@ -26,7 +26,9 @@ class PuppySeeder extends Seeder
                 $newPuppy->litter_id = $litter->id;
                 $newPuppy->name = $faker->firstName();
                 $newPuppy->gender = $faker->randomElement(['Maschio', 'Femmina']);
-                $newPuppy->color = $faker->randomElement(['BlackTricolor', 'BlueMerle', 'RedMerle', 'RedTricolor']);
+                $newPuppy->coat_color = $faker->randomElement(['BlackTricolor', 'BlueMerle', 'RedMerle', 'RedTricolor']);
+                $newPuppy->tail_type = $faker->randomElement(['NBT', 'Coda lunga']);
+                $newPuppy->description = $faker->paragraphs(2, true);
                 $newPuppy->status = $faker->randomElement(['Disponibile', 'Prenotato', 'Venduto']);
 
                 $newPuppy->save();

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('litter_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('gender');
-            $table->string('color')->nullable();;
+            $table->string('coat_color')->nullable();
+            $table->string('tail_type')->nullable();
             $table->string('status')->default('Disponibile');
             $table->text('description')->nullable();
             $table->string('image')->nullable();

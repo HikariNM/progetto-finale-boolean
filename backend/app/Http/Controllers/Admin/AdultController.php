@@ -46,6 +46,9 @@ class AdultController extends Controller
             'birth_date' => ['required', 'date'],
             'microchip' => ['nullable', 'string', 'size:15', 'unique:adults,microchip'],
             'pedigree_code' => ['nullable', 'string', 'max:35', 'unique:adults,pedigree_code'],
+            'coat_color' => ['nullable', 'string', 'in:Black Tricolor,Red Tricolor,Blue Merle,Red Merle'],
+            'tail_type' => ['nullable', 'string', 'in:NBT,Coda lunga'],
+            'description' => ['nullable', 'string', 'max:255'],
             'status' => ['required', 'string', 'in:Attivo,Ritirato'],
             'is:neutered' => ['nullable', 'boolean'],
             'titles' => ['nullable', 'array'],
@@ -55,6 +58,7 @@ class AdultController extends Controller
         ]);;
 
         $data = $request->all();
+
 
         // INSTANTIATING THE OBJECT
         $adult = new Adult();
@@ -67,6 +71,9 @@ class AdultController extends Controller
         $adult->birth_date = $data['birth_date'];
         $adult->microchip = $data['microchip'];
         $adult->pedigree_code = $data['pedigree_code'];
+        $adult->coat_color = $data['coat_color'];
+        $adult->tail_type = $data['tail_type'];
+        $adult->description = $data['description'];
         $adult->status = $data['status'];
         $adult->is_neutered = $request->has('is_neutered') ? true : false;
 
@@ -123,6 +130,9 @@ class AdultController extends Controller
             'birth_date' => ['required', 'date'],
             'microchip' => ['nullable', 'string', 'size:15', 'unique:adults,microchip,' . $adult->id],
             'pedigree_code' => ['nullable', 'string', 'max:35', 'unique:adults,pedigree_code,' . $adult->id],
+            'coat_color' => ['nullable', 'string', 'in:Black Tricolor,Red Tricolor,Blue Merle,Red Merle'],
+            'tail_type' => ['nullable', 'string', 'in:NBT,Coda lunga'],
+            'description' => ['nullable', 'string', 'max:255'],
             'status' => ['required', 'string', 'in:Attivo,Ritirato'],
             'is:neutered' => ['nullable', 'boolean'],
             'titles' => ['nullable', 'array'],
@@ -133,7 +143,6 @@ class AdultController extends Controller
 
         $data = $request->all();
 
-        // dd($data);
 
         // ATTRIBUTE UPDATE
         $adult->name = $data['name'];
@@ -142,6 +151,9 @@ class AdultController extends Controller
         $adult->birth_date = $data['birth_date'];
         $adult->microchip = $data['microchip'];
         $adult->pedigree_code = $data['pedigree_code'];
+        $adult->coat_color = $data['coat_color'];
+        $adult->tail_type = $data['tail_type'];
+        $adult->description = $data['description'];
         $adult->status = $data['status'];
         $adult->is_neutered = $request->has('is_neutered') ? true : false;
 
