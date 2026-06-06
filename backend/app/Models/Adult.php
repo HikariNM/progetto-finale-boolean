@@ -16,9 +16,13 @@ class Adult extends Model
         return $this->hasMany(Litter::class, 'mother_id');
     }
 
-    // Se l'adulto è un maschio
     public function littersAsFather()
     {
         return $this->hasMany(Litter::class, 'father_id');
+    }
+    public function geneticTests()
+    {
+        return $this->belongsToMany(GeneticTest::class, 'adult_genetic_test')
+            ->withPivot('test_date', 'result');;
     }
 }

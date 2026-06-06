@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('litters', function (Blueprint $table) {
             $table->id();
             $table->string('title'); //Litter A
-            $table->date('birth_date');
+            $table->date('birth_date')->nullable();
             $table->string('mother_id')->nullable()->constrained('adults')->nullOnDelete();
             $table->string('father_id')->nullable()->constrained('adults')->nullOnDelete();
             $table->string('external_father_name')->nullable();

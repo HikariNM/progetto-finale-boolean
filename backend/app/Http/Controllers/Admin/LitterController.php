@@ -38,7 +38,7 @@ class LitterController extends Controller
     {
         $request->validate([
             'title'                => ['required', 'string', 'max:255'],
-            'birth_date'           => ['required', 'date'],
+            'birth_date'           => ['nullable', 'date'],
             'status'               => ['required', 'string', 'in:In programma,Nata,Svezzata'],
             'mother_id'            => ['nullable', 'exists:adults,id'],
             'father_id'            => ['nullable', 'exists:adults,id'],
@@ -97,7 +97,7 @@ class LitterController extends Controller
     {
         $request->validate([
             'title'                => ['required', 'string', 'max:255'],
-            'birth_date'           => ['required', 'date'],
+            'birth_date'           => ['nullable', 'date'],
             'status'               => ['required', 'string', 'in:In programma,Nata,Svezzata'],
             'mother_id'            => ['nullable', 'exists:adults,id'],
             'father_id'            => ['nullable', 'exists:adults,id'],

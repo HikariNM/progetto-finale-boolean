@@ -97,9 +97,80 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="breeder" class="form-label fw-semibold">Allevatore (Opzionale)</label>
+                            <input type="text" class="form-control @error('breeder') is-invalid @enderror" id="breeder" name="breeder" value="{{ old('breeder', $adult->breeder) }}" >
+                            @error('breeder')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="owner" class="form-label fw-semibold">Proprietario (Opzionale)</label>
+                            <input type="text" class="form-control @error('owner') is-invalid @enderror" id="owner" name="owner" value="{{ old('owner', $adult->owner) }}" >
+                            @error('owner')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="col-12">
                             <label for="description" class="form-label fw-semibold">Descrizione (Opzionale)</label>
                             <textarea class="form-control" id="description" name="description" rows="4" placeholder="Inserisci una breve descrizione del cane con le sue caratteristiche.">{{ old('description', $adult->description) }}</textarea>
+                        </div>
+                        <div id="genetic-tests-wrapper">
+                            <h4 class="form-label fw-semibold">Test Genetici (Opzionale)</h4>
+                            @foreach ($geneticTests as $geneticTest)
+                                @php
+                                    $saved = $adult->geneticTests->firstWhere('id', $geneticTest->id);
+                                @endphp
+                                <div class="test-row mb-2 row">
+                                    <div class="col-auto">
+                                        <input 
+                                            type="checkbox" 
+                                            name="geneticTest[]" 
+                                            value="{{ $geneticTest->id }}"
+                                            class="toggle-test form-check-input" 
+                                            id="check-{{ $geneticTest->id }}"
+                                            {{ old('geneticTest') 
+                                                ? (in_array($geneticTest->id, old('geneticTest', [])) ? 'checked' : '')
+                                                : ($saved ? 'checked' : '') 
+                                            }}
+                                        >
+                                        <label class="form-check-label" for="check-{{ $geneticTest->id }}">
+                                            {{ $geneticTest->name }}
+                                        </label>
+                                    </div>
+                                    <div class="details-div col {{ old('geneticTest') 
+                                        ? (in_array($geneticTest->id, old('geneticTest', [])) ? '' : 'd-none')
+                                        : ($saved ? '' : 'd-none') 
+                                    }}">
+                                        <div class="row g-2">
+                                            <div class="col-auto">
+                                                <input 
+                                                    type="date" 
+                                                    class="form-control form-control-sm d-inline" 
+                                                    name="test_date[{{ $geneticTest->id }}]"
+                                                    value="{{ old('test_date.' . $geneticTest->id, $saved?->pivot->test_date ?? '') }}"
+                                                    {{ old('geneticTest') 
+                                                        ? (in_array($geneticTest->id, old('geneticTest', [])) ? '' : 'disabled')
+                                                        : ($saved ? '' : 'disabled') 
+                                                    }}>
+                                            </div>
+                                            <div class="col-auto">
+                                                <select name="result[{{ $geneticTest->id }}]" class="form-select form-select-sm @error('result.' . $geneticTest->id) is-invalid @enderror"
+                                                    id="result-{{ $geneticTest->id }}" 
+                                                    {{ old('geneticTest') 
+                                                    ? (in_array($geneticTest->id, old('geneticTest', [])) ? '' : 'disabled')
+                                                    : ($saved ? '' : 'disabled') 
+                                                    }}>
+                                                    <option value="" {{ old('result.' . $geneticTest->id, $saved?->pivot->result ?? '') === '' ? 'selected' : '' }} disabled>Risultato test...</option>
+                                                    <option value="Clear" {{ old('result.' . $geneticTest->id, $saved?->pivot->result ?? '') === 'Clear' ? 'selected' : '' }}>Clear</option>
+                                                    <option value="Affected" {{ old('result.' . $geneticTest->id, $saved?->pivot->result ?? '') === 'Affected' ? 'selected' : '' }}>Affected</option>
+                                                    <option value="Carrier" {{ old('result.' . $geneticTest->id, $saved?->pivot->result ?? '') === 'Carrier' ? 'selected' : '' }}>Carrier</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -203,6 +274,7 @@
         const btnRemove = document.getElementById('btn-remove-image');
         const inputRemove = document.getElementById('remove_image');
         const containerPreview = document.getElementById('preview-image-container');
+        const geneticWrapper = document.getElementById('genetic-tests-wrapper');
 
         /**
          * * Appends a new input field row when the "Aggiungi Titolo" button is clicked.
@@ -263,6 +335,39 @@
                 containerPreview.style.display = 'none';
             });
         }
-    });
+
+        geneticWrapper.addEventListener('change', function(e) {
+        if (e.target.classList.contains('toggle-test')) {
+        const row = e.target.closest('.test-row');
+        const detailsDiv = row.querySelector('.details-div');
+        if (e.target.checked) {
+                    detailsDiv.classList.remove('d-none');
+                    detailsDiv.classList.add('d-inline');
+                    detailsDiv.querySelectorAll('input, select').forEach(el => el.disabled = false); // ← aggiunto
+
+                } else {
+                    detailsDiv.classList.remove('d-inline');
+                    detailsDiv.classList.add('d-none');
+                    detailsDiv.querySelectorAll('input, select').forEach(el => el.disabled = true); // ← aggiunto
+
+                }
+            }
+});
+// document.querySelectorAll('.toggle-test').forEach(function(checkbox) {
+//     const row = checkbox.closest('.test-row');
+//     const detailsDiv = row.querySelector('.details-div');
+
+//     if (checkbox.checked) {
+//         detailsDiv.classList.remove('d-none');
+//         detailsDiv.classList.add('d-inline');
+
+//     } else {
+//         detailsDiv.classList.remove('d-inline');
+//         detailsDiv.classList.add('d-none');
+//     }
+// });
+
+
+});
 </script>
 @endsection

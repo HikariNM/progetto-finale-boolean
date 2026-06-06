@@ -78,6 +78,16 @@
                             <span class="text-dark fw-bold">{{ $adult->tail_type }}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between py-3">
+                            <span class="text-muted fw-semibold">Allevatore:</span>
+                            <span class="text-dark fw-bold">{{ $adult->breeder }}</span>
+                        </li>
+                        @foreach ($adult->geneticTests as $test)
+                        <li class="list-group-item d-flex justify-content-between py-3">
+                            <span class="text-muted fw-semibold">{{ $test->name }}:</span>
+                            <span class="text-dark fw-bold">{{ $test->pivot->result }}</span>
+                        </li>
+                        @endforeach
+                        <li class="list-group-item d-flex justify-content-between py-3">
                             <span class="text-muted fw-semibold">Codice Microchip:</span>
                             <span class="text-dark fw-mono font-monospace fw-bold">{{ $adult->microchip }}</span>
                         </li>

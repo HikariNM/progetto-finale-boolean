@@ -44,7 +44,7 @@ class AdultApiController extends Controller
          * 'load()' runs efficient subqueries to fetch related data (titles and litters) 
          * all at once, preventing the N+1 query problem when React processes the JSON.
          */
-        $adult->load(['titles', 'littersAsMother', 'littersAsFather']);
+        $adult->load(['titles', 'littersAsMother', 'littersAsFather', 'geneticTests']);
 
         return response()->json(
             [

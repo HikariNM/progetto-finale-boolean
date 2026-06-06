@@ -97,9 +97,51 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="breeder" class="form-label fw-semibold">Allevatore (Opzionale)</label>
+                            <input type="text" class="form-control @error('breeder') is-invalid @enderror" id="breeder" name="breeder" value="{{ old('breeder', $adult->breeder) }}" >
+                            @error('breeder')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="owner" class="form-label fw-semibold">Proprietario (Opzionale)</label>
+                            <input type="text" class="form-control @error('owner') is-invalid @enderror" id="owner" name="owner" value="{{ old('owner', $adult->owner) }}" >
+                            @error('owner')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="col-12">
                             <label for="description" class="form-label fw-semibold">Descrizione (Opzionale)</label>
                             <textarea class="form-control" id="description" name="description" rows="4" placeholder="Inserisci una breve descrizione del cane con le sue caratteristiche.">{{ old('description') }}</textarea>
+                        </div>
+
+                        <div id="genetic-tests-wrapper">
+                            <h4 class="form-label fw-semibold">Test Genetici (Opzionale)</h4>
+                            @foreach ($geneticTests as $geneticTest)
+                                <div class="test-row mb-2 row">
+                                    <div class="col-auto">
+                                        <input type="checkbox" name="geneticTest[]" value="{{$geneticTest->id}}" class="toggle-test form-check-input" id="check-{{$geneticTest->id}}">
+                                        <label class="form-check-label" for="check-{{$geneticTest->id}}">{{$geneticTest->name}}</label>
+                                    </div>
+                                    <div class="details-div d-none col">
+                                        <div class="row g-2">
+                                            <div class="col-auto">
+                                                <input type="date" class="form-control form-control-sm d-inline" name="test_date[{{$geneticTest->id}}]" disabled>
+                                            </div>
+                                            <div class="col-auto">
+                                                {{-- <input type="text" class="form-control form-control-sm d-inline" name="result[{{$geneticTest->id}}]" placeholder="Risultato" disabled> --}}
+                                            <select name="result[{{$geneticTest->id}}]"  class="form-control form-control-sm d-inline @error('result.' . $geneticTest->id) is-invalid @enderror" id="result[{{$geneticTest->id}}]">
+                                                <option value="" selected disabled>Risultato test...</option>
+                                                <option value="Clear" {{ old('result.' . $geneticTest->id) === 'Clear' ? 'selected' : '' }}>Clear</option>
+                                                <option value="Affected" {{ old('result.' . $geneticTest->id) === 'Affected' ? 'selected' : '' }}>Affected</option>
+                                                <option value="Carrier" {{ old('result.' . $geneticTest->id) === 'Carrier' ? 'selected' : '' }}>Carrier</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -185,6 +227,7 @@
         const addButton = document.getElementById('add-title-btn');
         const isNeuteredCheckbox = document.getElementById('is_neutered');
         const statusSelect = document.getElementById('status');
+        const geneticWrapper = document.getElementById('genetic-tests-wrapper');
 
         /**
          * 
@@ -237,6 +280,23 @@
                 isNeuteredCheckbox.checked = false;
             }
         });
+
+        geneticWrapper.addEventListener('change', function(e) {
+        if (e.target.classList.contains('toggle-test')) {
+        const row = e.target.closest('.test-row');
+        const detailsDiv = row.querySelector('.details-div');
+
+                if (e.target.checked) {
+                    detailsDiv.classList.remove('d-none');
+                    detailsDiv.classList.add('d-inline');
+                    detailsDiv.querySelectorAll('input').forEach(input => input.disabled = false);
+                } else {
+                    detailsDiv.classList.remove('d-inline');
+                    detailsDiv.classList.add('d-none');
+                    detailsDiv.querySelectorAll('input').forEach(input => input.disabled = true);
+                }
+            }
+        }); 
     });
 </script>
 @endsection

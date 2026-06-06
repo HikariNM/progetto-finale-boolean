@@ -48,7 +48,7 @@
                                         <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill px-3">
                                             <i class="fa-solid fa-mars me-1"></i> Maschio
                                         </span>
-                                    -- @else
+                                    @else
                                         <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-3">
                                             <i class="fa-solid fa-venus me-1"></i> Femmina
                                         </span>

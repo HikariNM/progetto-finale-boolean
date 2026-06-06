@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Adult;
+use App\Models\GeneticTest;
 use App\Models\Title;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +27,8 @@ class AdultController extends Controller
      */
     public function create()
     {
-        return view('admin.adults.create');
+        $geneticTests = GeneticTest::all();
+        return view('admin.adults.create', compact('geneticTests'));
     }
 
     /**
@@ -48,21 +50,25 @@ class AdultController extends Controller
             'pedigree_code' => ['nullable', 'string', 'max:35', 'unique:adults,pedigree_code'],
             'coat_color' => ['nullable', 'string', 'in:Black Tricolor,Red Tricolor,Blue Merle,Red Merle'],
             'tail_type' => ['nullable', 'string', 'in:NBT,Coda lunga'],
-            'description' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string', 'max:1000'],
+            'breeder' => ['nullable', 'string', 'max:255'],
+            'owner' => ['nullable', 'string', 'max:255'],
             'status' => ['required', 'string', 'in:Attivo,Ritirato'],
-            'is:neutered' => ['nullable', 'boolean'],
+            'is_neutered' => ['nullable', 'boolean'],
             'titles' => ['nullable', 'array'],
             // 'titles.*' validate EACH SINGLE ELEMENT inside the 'titles' array.
             // It ensures that every dynamically added title is a safe string and under 255 characters.
-            'title' => ['nullable', 'string', 'max:255']
+            'title' => ['nullable', 'string', 'max:255'],
+            'geneticTest' => ['nullable', 'array'],
+            'result' => ['nullable', 'array'],
+            // 'result.*' => ['nullable', 'string', 'in:Clear,Carrier,Affected'],
+            'test_date' => ['nullable', 'array'],
         ]);;
 
         $data = $request->all();
-
-
+        // dd($data);
         // INSTANTIATING THE OBJECT
         $adult = new Adult();
-
 
         // ATTRIBUTE MAPPING
         $adult->name = $data['name'];
@@ -71,6 +77,8 @@ class AdultController extends Controller
         $adult->birth_date = $data['birth_date'];
         $adult->microchip = $data['microchip'];
         $adult->pedigree_code = $data['pedigree_code'];
+        $adult->breeder = $data['breeder'];
+        $adult->owner = $data['owner'];
         $adult->coat_color = $data['coat_color'];
         $adult->tail_type = $data['tail_type'];
         $adult->description = $data['description'];
@@ -96,8 +104,19 @@ class AdultController extends Controller
                 }
             }
         }
+        if ($request->has('geneticTest')) {
+            $testData = [];
+            foreach ($request->geneticTest as $test) {
+                $testData[$test] = [
+                    'test_date' => $request->test_date[$test] ?? null,
+                    'result' => $request->result[$test] ?? null
+                ];
+            }
+            $adult->geneticTests()->attach($testData);
+        }
 
-        return redirect()->route('admin.adults.index');
+
+        return redirect()->route('admin.adults.show', $adult);
     }
 
     /**
@@ -105,7 +124,9 @@ class AdultController extends Controller
      */
     public function show(Adult $adult)
     {
-        return view('admin.adults.show', compact('adult'));
+        $geneticTests = GeneticTest::all();
+
+        return view('admin.adults.show', compact('adult', 'geneticTests'));
     }
 
     /**
@@ -113,9 +134,11 @@ class AdultController extends Controller
      */
     public function edit(Adult $adult)
     {
+        $adult->load('geneticTests');
         $titles = Title::all();
+        $geneticTests = GeneticTest::all();
 
-        return view('admin.adults.edit', compact('adult', 'titles'));
+        return view('admin.adults.edit', compact('adult', 'titles', 'geneticTests'));
     }
 
     /**
@@ -123,6 +146,7 @@ class AdultController extends Controller
      */
     public function update(Request $request, Adult $adult)
     {
+        // dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'in:Maschio,Femmina'],
@@ -132,13 +156,19 @@ class AdultController extends Controller
             'pedigree_code' => ['nullable', 'string', 'max:35', 'unique:adults,pedigree_code,' . $adult->id],
             'coat_color' => ['nullable', 'string', 'in:Black Tricolor,Red Tricolor,Blue Merle,Red Merle'],
             'tail_type' => ['nullable', 'string', 'in:NBT,Coda lunga'],
-            'description' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string', 'max:1000'],
+            'breeder' => ['nullable', 'string', 'max:255'],
+            'owner' => ['nullable', 'string', 'max:255'],
             'status' => ['required', 'string', 'in:Attivo,Ritirato'],
-            'is:neutered' => ['nullable', 'boolean'],
+            'is_neutered' => ['nullable', 'boolean'],
             'titles' => ['nullable', 'array'],
             // 'titles.*' validate EACH SINGLE ELEMENT inside the 'titles' array.
             // It ensures that every dynamically added title is a safe string and under 255 characters.
-            'titles.*' => ['nullable', 'string', 'max:255']
+            'titles.*' => ['nullable', 'string', 'max:255'],
+            'geneticTest' => ['nullable', 'array'],
+            'result' => ['nullable', 'array'],
+            // 'result.*' => ['nullable', 'string', 'in:Clear,Carrier,Affected'],
+            'test_date' => ['nullable', 'array'],
         ]);
 
         $data = $request->all();
@@ -151,6 +181,8 @@ class AdultController extends Controller
         $adult->birth_date = $data['birth_date'];
         $adult->microchip = $data['microchip'];
         $adult->pedigree_code = $data['pedigree_code'];
+        $adult->breeder = $data['breeder'];
+        $adult->owner = $data['owner'];
         $adult->coat_color = $data['coat_color'];
         $adult->tail_type = $data['tail_type'];
         $adult->description = $data['description'];
@@ -200,6 +232,18 @@ class AdultController extends Controller
                 $newTitle->save();
             }
         }
+
+        $testData = [];
+        if ($request->has('geneticTest')) {
+            foreach ($request->geneticTest as $test) {
+                $testData[$test] = [
+                    'test_date' => $request->test_date[$test] ?? null,
+                    'result' => $request->result[$test] ?? null
+                ];
+            }
+        }
+        $adult->geneticTests()->sync($testData);
+
 
         return redirect()->route('admin.adults.show', $adult);
     }
