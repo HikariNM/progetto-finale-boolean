@@ -5,7 +5,7 @@ import DefaultLayout from './layouts/DefaultLayout'
 import HomePage from './pages/HomePage'
 import BreedPage from './pages/BreedPage'
 import LittersPage from './pages/LittersPage'
-import AdultsPage from './pages/AdultPage'
+import OurDogsPage from './pages/OurDogsPage'
 import AdultDetailPage from './pages/AdultDetailPage'
 import LitterDetailPage from './pages/LitterDetailPage'
 
@@ -21,8 +21,8 @@ function App() {
             <Route path="/cucciolate/in-programma" element={<LittersPage type='upcoming' />} />
             <Route path="/cucciolate/passate" element={<LittersPage type='past' />} />
             <Route path="/cucciolate/:id" element={<LitterDetailPage />} />
-            <Route path="/i-nostri-cani/stalloni" element={<AdultsPage gender='male' />} />
-            <Route path="/i-nostri-cani/fattrici" element={<AdultsPage gender='female' />} />
+            <Route path="/i-nostri-cani/stalloni" element={<OurDogsPage gender='male' />} />
+            <Route path="/i-nostri-cani/fattrici" element={<OurDogsPage gender='female' />} />
             <Route path="/i-nostri-cani/:id" element={<AdultDetailPage />} />
           </Route>
         </Routes>

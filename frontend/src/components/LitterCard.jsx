@@ -24,7 +24,7 @@ export default function LitterCard({ litter, index, isUpcoming }) {
                 </p>
 
                 <div className="border-top pt-3 mt-3 text-secondary">
-                    <p className="mb-1 small"><strong>Padre:</strong> {litter.father ? ` ${litter.father.name} - ${litter.father.pedigree_code}` : ' Informazioni non disponibili'}</p>
+                    <p className="mb-0 small"><strong>Padre:</strong> {litter.father ? ` ${litter.father.name} - ${litter.father.pedigree_code}` : ' Informazioni non disponibili'}</p>
                     <p className="mb-0 small"><strong>Madre:</strong> {litter.mother ? ` ${litter.mother.name} - ${litter.mother.pedigree_code}` : ' Informazioni non disponibili'}</p>
                 </div>
             </div>

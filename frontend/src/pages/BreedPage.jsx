@@ -7,7 +7,6 @@ import curiosityImg from '../assets/breed/curiosityImg.jpg'
 export default function BreedPage() {
     return (
         <main className="bg-white text-dark min-vh-100 py-5 mt-5">
-            {/* Page Title */}
             <section className="container mb-5 pt-4">
                 <div className="row justify-content-center text-center">
                     <div className="col-lg-8">
@@ -21,7 +20,6 @@ export default function BreedPage() {
                 </div>
             </section>
 
-            {/* Row 1: Storia e Origini (Immagine a Sinistra, Testo a Destra) */}
             <section className="container my-5 py-4">
                 <div className="row align-items-center g-5">
                     <div className="col-md-6">
@@ -47,7 +45,6 @@ export default function BreedPage() {
                 </div>
             </section>
 
-            {/* Row 2: Carattere (Testo a Sinistra, Immagine a Destra) */}
             <section className="container my-5 py-4">
                 <div className="row align-items-center g-5 flex-md-row-reverse">
                     <div className="col-md-6">
@@ -71,7 +68,6 @@ export default function BreedPage() {
                 </div>
             </section>
 
-            {/* Row 3: Il Cane in Famiglia (Immagine a Sinistra, Testo a Destra) */}
             <section className="container my-5 py-4">
                 <div className="row align-items-center g-5">
                     <div className="col-md-6">
@@ -95,7 +91,6 @@ export default function BreedPage() {
                 </div>
             </section>
 
-            {/* Row 4: Aspetto Generale e Colori (Testo a Sinistra, Immagine a Destra) */}
             <section className="container my-5 py-4">
                 <div className="row align-items-center g-5 flex-md-row-reverse">
                     <div className="col-md-6">
@@ -119,7 +114,6 @@ export default function BreedPage() {
                 </div>
             </section>
 
-            {/* Row 5: Curiosità (Immagine a Sinistra, Testo a Destra) */}
             <section className="container my-5 py-4">
                 <div className="row align-items-center g-5">
                     <div className="col-md-6">

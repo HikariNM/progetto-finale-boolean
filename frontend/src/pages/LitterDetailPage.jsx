@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -12,6 +13,8 @@ export default function LitterDetailPage() {
             .then(res => {
                 setLitter(res.data.data);
                 setLoading(false);
+
+                console.log(res.data.data)
             })
             .catch(err => console.error("Errore nel caricamento:", err));
     }, [id]);
@@ -23,7 +26,6 @@ export default function LitterDetailPage() {
         <main className="bg-light py-5 mt-5">
             <div className="container">
                 <div className="row g-5">
-                    {/* Immagine Principale */}
                     <div className="col-lg-6">
                         <img
                             src={litter.image ? `http://localhost:8000/storage/${litter.image}` : 'https://placehold.co/800x600'}
@@ -32,7 +34,6 @@ export default function LitterDetailPage() {
                         />
                     </div>
 
-                    {/* Info Cucciolata */}
                     <div className="col-lg-6">
                         <h1 className="fw-bold text-uppercase">{litter.title}</h1>
                         <h4 className="text-muted mb-4">{litter.father?.name} x {litter.mother?.name}</h4>
@@ -43,20 +44,25 @@ export default function LitterDetailPage() {
                                 <h5 className="card-title">Dettagli Accoppiamento</h5>
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item d-flex justify-content-between">
-                                        <strong>Padre:</strong> <span>{litter.father?.name} ({litter.father?.pedigree_code})</span>
+                                        <strong>Padre:</strong>
+                                        {litter.father ?
+                                            <Link to={`/i-nostri-cani/${litter.father?.id}`} className="mb-1 text-decoration-none text-black"> {litter.father?.name} ({litter.father?.pedigree_code})</Link>
+                                            : <span>Informazioni non disponibili</span>
+                                        }
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between">
-                                        <strong>Madre:</strong> <span>{litter.mother?.name} ({litter.mother?.pedigree_code})</span>
+                                        <strong>Madre:</strong>
+                                        <Link to={`/i-nostri-cani/${litter.mother.id}`} className="mb-1 text-decoration-none text-black"><span>{litter.mother?.name} ({litter.mother?.pedigree_code})</span></Link>
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between">
                                         <strong>Stato:</strong> <span>{litter.status}</span>
                                     </li>
-
+                                    {/* {litter.father ? ` ${litter.father.name} - ${litter.father.pedigree_code}` : ' Informazioni non disponibili'} */}
                                     <li className="list-group-item d-flex justify-content-between">
-                                        <strong>Nati il:</strong> <span>{litter.birth_date}</span>
+                                        <strong>Nati il:</strong> <span>{litter.birth_date ? `${litter.birth_date}` : 'In programma'}</span>
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between">
-                                        <strong>Cuccioli {litter.status?.toLowerCase() === 'in programma' ? 'previsti' : 'nati'}:</strong> <span>{litter.puppies?.length || 0}</span>
+                                        <strong>Cuccioli {litter.status?.toLowerCase() === 'in programma' ? 'previsti' : 'nati'}:</strong> <span>{litter.puppies?.length || 'N.D'}</span>
                                     </li>
                                 </ul>
                             </div>
