@@ -17,7 +17,7 @@ export default function AdultsPage({ gender }) {
         setLoading(true);
         setError(null);
 
-        axios.get(`http://localhost:8000/api/adults`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/adults`, {
             params: { gender: gender } // Send 'male' or 'female' to the controller
         })
             .then((response) => {

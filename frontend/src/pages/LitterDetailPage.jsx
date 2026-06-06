@@ -9,7 +9,7 @@ export default function LitterDetailPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/litters/${id}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/api/litters/${id}`)
             .then(res => {
                 setLitter(res.data.data);
                 setLoading(false);
@@ -26,7 +26,7 @@ export default function LitterDetailPage() {
                 <div className="row g-5">
                     <div className="col-lg-6">
                         <img
-                            src={litter.image ? `http://localhost:8000/storage/${litter.image}` : 'https://placehold.co/800x600'}
+                            src={litter.image ? `${import.meta.env.VITE_API_URL}/storage/${litter.image}` : 'https://placehold.co/800x600'}
                             alt={litter.title}
                             className="img-fluid rounded shadow"
                         />

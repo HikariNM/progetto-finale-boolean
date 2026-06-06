@@ -18,7 +18,7 @@ export default function LittersPage({ type }) {
         setLoading(true);
         setError(null);
 
-        axios.get(`http://localhost:8000/api/litters`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/litters`, {
             params: { status: type } // Send 'upcoming' or 'past' to the Laravel controller
         })
             .then((response) => {

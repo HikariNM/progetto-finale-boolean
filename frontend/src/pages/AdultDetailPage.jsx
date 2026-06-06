@@ -10,7 +10,7 @@ export default function AdultDetailPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/adults/${id}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/api/adults/${id}`)
             .then(res => {
                 setAdult(res.data.data);
                 setAllLitter([...res.data.data.litters_as_father,
@@ -30,7 +30,7 @@ export default function AdultDetailPage() {
                 <div className="row g-5">
                     <div className="col-lg-6">
                         <img
-                            src={adult.image ? `http://localhost:8000/storage/${adult.image}` : 'https://placehold.co/800x600'}
+                            src={adult.image ? `${import.meta.env.VITE_API_URL}/storage/${adult.image}` : 'https://placehold.co/800x600'}
                             alt={adult.name}
                             className="img-fluid rounded shadow"
                         />

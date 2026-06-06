@@ -7,7 +7,7 @@ export default function AdultCard({ adult, index }) {
         >
             <div className="col-md-6">
                 <img
-                    src={adult.image ? `http://localhost:8000/storage/${adult.image}` : 'https://placehold.co/600x400'}
+                    src={adult.image ? `${import.meta.env.VITE_API_URL}/storage/${adult.image}` : 'https://placehold.co/600x400'}
                     alt={`Adulto ${adult.name}`}
                     className="img-fluid rounded shadow-sm w-100"
                     style={{ objectFit: 'cover', maxHeight: '400px' }}
