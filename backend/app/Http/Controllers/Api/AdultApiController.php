@@ -17,7 +17,7 @@ class AdultApiController extends Controller
         if ($request->input('gender')) {
             $gender = $request->input('gender');
 
-            if ($gender === 'male' || $gender === 'Femmina') {
+            if ($gender === 'male') {
                 $query->where('gender', 'Maschio');
             } elseif ($gender === 'female') {
                 $query->where('gender', 'Femmina');

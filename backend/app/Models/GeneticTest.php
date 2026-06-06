@@ -8,6 +8,7 @@ class GeneticTest extends Model
 {
     public function adult()
     {
-        return $this->belongsToMany(Adult::class);
+        return $this->belongsToMany(Adult::class, 'adult_genetic_test')
+            ->withPivot('test_date', 'result');
     }
 }
