@@ -13,8 +13,6 @@ export default function LitterDetailPage() {
             .then(res => {
                 setLitter(res.data.data);
                 setLoading(false);
-
-                console.log(res.data.data)
             })
             .catch(err => console.error("Errore nel caricamento:", err));
     }, [id]);

@@ -21,9 +21,6 @@ export default function AdultDetailPage() {
             })
             .catch(err => console.error(err));
     }, [id]);
-    useEffect(() => {
-        console.log(allLitter)
-    }, [allLitter])
 
     if (loading) return <div className="text-center py-5">Caricamento...</div>;
 
@@ -68,10 +65,10 @@ export default function AdultDetailPage() {
                                         <strong>Data di nascita:</strong> <span>{adult.birth_date}</span>
                                     </li>
                                     <li className="list-group-column d-flex justify-content-between">
-                                        {/* <strong>Allevatore:</strong> <span>{adult.breeder.charAt(0).toUpperCase() + adult.breeder.slice(1)}</span> */}
+                                        <strong>Allevatore:</strong> <span>{adult.breeder?.charAt(0).toUpperCase() + adult.breeder?.slice(1) || 'N.D'}</span>
                                     </li>
                                     <li className="list-group-column d-flex justify-content-between">
-                                        {/* <strong>Proprietario:</strong> <span>{adult.owner.charAt(0).toUpperCase() + adult.owner.slice(1)}</span> */}
+                                        <strong>Proprietario:</strong> <span>{adult.owner?.charAt(0).toUpperCase() + adult.owner?.slice(1) || 'N.D'}</span>
                                     </li>
                                     <li className="list-group-column d-flex justify-content-between">
                                         <strong>Colore:</strong> <span>{adult.coat_color}</span>
