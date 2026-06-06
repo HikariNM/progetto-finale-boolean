@@ -1,4 +1,6 @@
-import heroImage from '../assets/hero.png'
+import heroImage from '../assets/hero.png';
+import homeImg01 from '../assets/homePageImg01.jpg';
+import homeImg02 from '../assets/homePageImg02.jpg';
 
 export default function HomePage() {
     return (
@@ -31,7 +33,7 @@ export default function HomePage() {
 
                             <img
                                 className="img-fluid float-start me-4 mb-3 rounded shadow"
-                                src="src\assets\homePageImg01.jpg"
+                                src={homeImg01}
                                 alt="About Starbound Kennel"
                                 style={{ maxWidth: '300px', width: '100%' }}
                             />
@@ -50,7 +52,7 @@ export default function HomePage() {
 
                             <img
                                 className="img-fluid float-end ms-4 mb-3 rounded shadow"
-                                src="src\assets\homePageImg02.jpg"
+                                src={homeImg02}
                                 alt="Our Australian Shepherd"
                                 style={{ maxWidth: '300px', width: '100%' }}
                             />
