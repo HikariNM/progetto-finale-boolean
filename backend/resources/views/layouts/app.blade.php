@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Starbound Kenneò') }} - Admin</title>
+    <title>{{ config('app.name', 'Starbound Kennel') }} - Admin</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -55,12 +55,26 @@
 
                 <div class="d-flex align-items-center gap-3">
                     @auth
-                        {{-- <span class="text-light small">
-                            <i class="fa-solid fa-user me-1 text-muted"></i> {{ Auth::user()?->name }}
-                        </span> --}}
-                        <span>
-                            <a class="text-light text-decoration-none" href="{{ url('profile') }}">{{ Auth::user()?->name }}</a>
-                        </span>
+
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="text-light nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url('profile') }}">{{__('Profile')}}</a>
+                                <a class="dropdown-item" href="{{ url('admin/users') }}">{{__('Gestione utenti')}}</a>
+                                {{-- <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a> --}}
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+
                         <form method="POST" action="{{ route('logout') }}" class="m-0">
                             @csrf
                             <button type="submit" class="btn btn-sm btn-outline-danger">
@@ -73,9 +87,9 @@
                         <a href="{{ route('login') }}" class="btn btn-sm btn-light">
                             Accedi
                         </a>
-                        <a href="{{ route('register') }}" class="btn btn-sm btn-light">
+                        {{-- <a href="{{ route('register') }}" class="btn btn-sm btn-light">
                             Registrati
-                        </a>
+                        </a> --}}
                     @endguest
                 </div>
             </div>

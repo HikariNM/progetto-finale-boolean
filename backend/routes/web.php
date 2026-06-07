@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GeneticTestController;
 use App\Http\Controllers\Admin\LitterController;
 use App\Http\Controllers\Admin\PuppyController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,7 @@ Route::middleware(['auth', 'verified'])
         Route::resource('litters', LitterController::class);
         Route::resource('puppies', PuppyController::class);
         Route::resource('genetic-test', GeneticTestController::class);
+        Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'destroy']);
     });
 
 
