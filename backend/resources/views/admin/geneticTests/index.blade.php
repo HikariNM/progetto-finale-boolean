@@ -6,7 +6,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="fw-bold text-dark m-0">Registro Test Genetici</h1>
-            <p class="text-muted m-0">Gestisci i test hemtici disponibili per i cani adulti</p>
+            <p class="text-muted m-0">Gestisci i test genetici disponibili per i cani adulti</p>
         </div>
         <a href="{{ route('admin.genetic-test.create') }}" class="btn btn-primary shadow-sm">
             Nuovo Test
