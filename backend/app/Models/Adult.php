@@ -23,6 +23,6 @@ class Adult extends Model
     public function geneticTests()
     {
         return $this->belongsToMany(GeneticTest::class, 'adult_genetic_test')
-            ->withPivot('test_date', 'result');;
+            ->withPivot('test_date', 'result');
     }
 }

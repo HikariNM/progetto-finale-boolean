@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Allevamento Pro') }} - Admin</title>
+    <title>{{ config('app.name', 'Starbound Kenneò') }} - Admin</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -43,6 +43,11 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.puppies.*') ? 'active fw-bold' : '' }}" href="{{ route('admin.puppies.index') }}">
                             <i class="fa-solid fa-dog me-1"></i> Cuccioli Anagrafica
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('admin.genetic-test.*') ? 'active fw-bold' : '' }}" href="{{ route('admin.genetic-test.index') }}">
+                            <i class="fa-solid fa-dna me-1"></i> Test Genetici
                         </a>
                     </li>
                     @endauth

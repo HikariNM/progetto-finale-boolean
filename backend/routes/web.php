@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdultController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\GeneticTestController;
 use App\Http\Controllers\Admin\LitterController;
 use App\Http\Controllers\Admin\PuppyController;
 use App\Http\Controllers\ProfileController;
@@ -24,6 +25,7 @@ Route::middleware(['auth', 'verified'])
         Route::resource('adults', AdultController::class);
         Route::resource('litters', LitterController::class);
         Route::resource('puppies', PuppyController::class);
+        Route::resource('genetic-test', GeneticTestController::class);
     });
 
 

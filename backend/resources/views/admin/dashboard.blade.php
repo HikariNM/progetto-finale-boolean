@@ -67,6 +67,21 @@
             </div>
         </div>
 
+        <div class="col-12 col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body d-flex align-items-center justify-content-between p-4">
+                    <div>
+                        <h6 class="text-muted text-uppercase small mb-1">Catalogo Test Genetici</h6>
+                        <h3 class="display-6 fw-bold text-dark mb-2">{{ $genticTests }}</h3>
+                        <a href="{{ route('admin.genetic-test.index') }}" class="text-muted text-decoration-none small fw-bold">Filtra disponibili</a>
+                    </div>
+                    <div class="bg-secondary bg-opacity-10 text-secondary rounded p-3 fs-3">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="card border-0 shadow-sm">
