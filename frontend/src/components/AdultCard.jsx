@@ -27,6 +27,7 @@ export default function AdultCard({ adult, index }) {
                 <div className="border-top pt-3 mt-3 text-secondary">
                     <p className="mb-1 small"><strong>Titoli:</strong> {adult.titles?.map(t => t.name).join(', ') || 'Nessun titolo'}</p>
                     <p className="mb-0 small"><strong>Data di nascita:</strong> {adult.birth_date}</p>
+                    <p className="mb-0 small"><strong>Stato in allevamento:</strong> {adult.status}</p>
                 </div>
             </div>
         </section>

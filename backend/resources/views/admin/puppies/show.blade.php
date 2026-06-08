@@ -63,7 +63,7 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex justify-content-between py-3">
                             <span class="text-muted fw-semibold">Colore / Mantello:</span>
-                            <span class="text-dark fw-bold">{{ $puppy->color ?? 'Non specificato' }}</span>
+                            <span class="text-dark fw-bold">{{ $puppy->coat_color ?? 'Non specificato' }}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between py-3">
                             <span class="text-muted fw-semibold">Data di Nascita:</span>
@@ -149,7 +149,7 @@
                                             @else
                                                 <span class="text-danger small ms-1"><i class="fa-solid fa-venus"></i></span>
                                             @endif
-                                            <span class="text-muted small ms-2">({{ $sibling->color ?? 'colore n.d.' }})</span>
+                                            <span class="text-muted small ms-2">({{ $sibling->coat_color ?? 'colore n.d.' }})</span>
                                         </div>
                                         <a href="{{ route('admin.puppies.show', $sibling->id) }}" class="btn btn-sm btn-light border">
                                             Vedi Scheda

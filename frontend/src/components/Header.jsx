@@ -80,6 +80,9 @@ export default function Navbar() {
                                 </li>
                             </ul>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/cuccioli-disponibili" onClick={closeMenu}>Cuccioli disponibili</Link>
+                        </li>
 
                         {/* <li className="nav-item">
                             <Link className="nav-link" to="/gallery" onClick={closeMenu}>Gallery</Link>

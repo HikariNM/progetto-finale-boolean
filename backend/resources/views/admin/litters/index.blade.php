@@ -48,7 +48,7 @@
                                 
                                 <td>
                                     <div class="fw-semibold text-dark">
-                                        {{ $litter->mother->name }}
+                                        {{ $litter->mother?->name }}
                                     </div>
                                 </td>
                                 

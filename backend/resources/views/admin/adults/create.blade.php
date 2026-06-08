@@ -99,14 +99,14 @@
                         </div>
                         <div class="col-12 col-sm-6">
                             <label for="breeder" class="form-label fw-semibold">Allevatore (Opzionale)</label>
-                            <input type="text" class="form-control @error('breeder') is-invalid @enderror" id="breeder" name="breeder" value="{{ old('breeder', $adult->breeder) }}" >
+                            <input type="text" class="form-control @error('breeder') is-invalid @enderror" id="breeder" name="breeder" value="{{ old('breeder') }}" >
                             @error('breeder')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-12 col-sm-6">
                             <label for="owner" class="form-label fw-semibold">Proprietario (Opzionale)</label>
-                            <input type="text" class="form-control @error('owner') is-invalid @enderror" id="owner" name="owner" value="{{ old('owner', $adult->owner) }}" >
+                            <input type="text" class="form-control @error('owner') is-invalid @enderror" id="owner" name="owner" value="{{ old('owner') }}" >
                             @error('owner')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -115,7 +115,7 @@
                             <label for="description" class="form-label fw-semibold">Descrizione (Opzionale)</label>
                             <textarea class="form-control" id="description" name="description" rows="4" placeholder="Inserisci una breve descrizione del cane con le sue caratteristiche.">{{ old('description') }}</textarea>
                         </div>
-
+                        
                         <div id="genetic-tests-wrapper">
                             <h4 class="form-label fw-semibold">Test Genetici (Opzionale)</h4>
                             @foreach ($geneticTests as $geneticTest)

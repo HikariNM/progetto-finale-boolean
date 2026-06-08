@@ -50,7 +50,10 @@ export default function LitterDetailPage() {
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between">
                                         <strong>Madre:</strong>
-                                        <Link to={`/i-nostri-cani/${litter.mother.id}`} className="mb-1 text-decoration-none text-black"><span>{litter.mother?.name} ({litter.mother?.pedigree_code})</span></Link>
+                                        {litter.mother ?
+                                            <Link to={`/i-nostri-cani/${litter.father?.id}`} className="mb-1 text-decoration-none text-black"> {litter.mother?.name} ({litter.mother?.pedigree_code})</Link>
+                                            : <span>Informazioni non disponibili</span>
+                                        }
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between">
                                         <strong>Stato:</strong> <span>{litter.status}</span>

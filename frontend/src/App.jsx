@@ -8,6 +8,7 @@ import LittersPage from './pages/LittersPage'
 import OurDogsPage from './pages/OurDogsPage'
 import AdultDetailPage from './pages/AdultDetailPage'
 import LitterDetailPage from './pages/LitterDetailPage'
+import AvailablePuppies from './pages/AvailablePuppies'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
             <Route path="/i-nostri-cani/stalloni" element={<OurDogsPage gender='male' />} />
             <Route path="/i-nostri-cani/fattrici" element={<OurDogsPage gender='female' />} />
             <Route path="/i-nostri-cani/:id" element={<AdultDetailPage />} />
+            <Route path="/cuccioli-disponibili" element={<AvailablePuppies />} />
           </Route>
         </Routes>
       </BrowserRouter>

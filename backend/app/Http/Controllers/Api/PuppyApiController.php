@@ -10,15 +10,8 @@ class PuppyApiController extends Controller
 {
     public function index(Request $request)
     {
-        // Initialize the query builder for the Puppy model
-        $query = Puppy::query();
-        // Check if the 'status' parameter exists in the request URL
-        if ($request->input('status')) {
-            // Filter by the 'status' column matching the input value from the URL
-            $query->where('status', $request->input('status'));
-        }
-        // Execute the query and fetch the filtered or unfiltered results from the database
-        $puppies = $query->get();
+
+        $puppies = Puppy::where('status', 'Disponibile')->with(['litter', 'litter.mother', 'litter.father'])->get();
 
         return response()->json(
             [

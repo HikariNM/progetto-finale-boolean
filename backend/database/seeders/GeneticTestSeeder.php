@@ -21,6 +21,7 @@ class GeneticTestSeeder extends Seeder
             ['name' => 'HFS4', 'description' => 'Hereditary Cataracts'],
             ['name' => 'NCL', 'description' => 'Neuronal Ceroid Lipofuscinosis'],
             ['name' => 'MH', 'description' => 'Malignant Hyperthermia'],
+            ['name' => 'SLC/HUU', 'description' => 'Iperuricosuria'],
         ]);
     }
 }

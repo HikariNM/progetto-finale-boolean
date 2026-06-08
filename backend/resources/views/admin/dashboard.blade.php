@@ -97,6 +97,9 @@
                 <a href="{{ route('admin.puppies.create') }}" class="btn btn-dark px-4 py-2 shadow-sm">
                     <i class="fa-solid fa-plus me-1"></i> Aggiungi Singolo Cucciolo
                 </a>
+                <a href="{{ route('admin.genetic-test.create') }}" class="btn btn-dark px-4 py-2 shadow-sm">
+                    <i class="fa-solid fa-plus me-1"></i> Aggiungi un nuovo Test
+                </a>
                 
             </div>
         </div>

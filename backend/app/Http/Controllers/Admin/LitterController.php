@@ -84,8 +84,8 @@ class LitterController extends Controller
      */
     public function edit(Litter $litter)
     {
-        $mothers = Adult::where('gender', 'Femmina')->orderBy('name')->get();
-        $fathers = Adult::where('gender', 'Maschio')->orderBy('name')->get();
+        $mothers = Adult::where('gender', 'Femmina')->where('status', 'Attivo')->orderBy('name')->get();
+        $fathers = Adult::where('gender', 'Maschio')->where('status', 'Attivo')->orderBy('name')->get();
 
         return view('admin.litters.edit', compact('litter', 'mothers', 'fathers'));
     }
