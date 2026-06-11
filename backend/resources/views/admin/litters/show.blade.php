@@ -77,7 +77,7 @@
                         <h4 class="fw-bold text-dark m-0">Componenti della Cucciolata</h4>
                         <p class="text-muted small m-0">Lista dei singoli cuccioli nati da questo accoppiamento</p>
                     </div>
-                    <button type="button" class="btn btn-sm btn-primary shadow-sm px-3" title="Elimina" data-bs-toggle="modal" data-bs-target="#addPuppyModal">
+                    <button type="button" class="btn btn-sm btn-primary shadow-sm px-3" title="Aggiungi" data-bs-toggle="modal" data-bs-target="#addPuppyModal">
                         Aggiungi Cucciolo
                     </button> 
                 </div>

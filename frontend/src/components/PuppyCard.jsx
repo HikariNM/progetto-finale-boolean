@@ -24,10 +24,10 @@ export default function PuppyCard({ puppy, index }) {
                 </p>
 
                 <div className="border-top pt-3 mt-3 text-secondary">
-                    <Link to={`/i-nostri-cani/${puppy.litter.father.id}`} className="text-decoration-none text-dark" >
+                    <Link to={`/i-nostri-cani/${puppy.litter.father?.id}`} className="text-decoration-none text-dark" >
                         <p className="mb-0 small"><strong>Padre:</strong> {puppy.litter.father ? ` ${puppy.litter.father.name} - ${puppy.litter.father.pedigree_code}` : ' Informazioni non disponibili'}</p>
                     </Link>
-                    <Link to={`/i-nostri-cani/${puppy.litter.mother.id}`} className="text-decoration-none text-dark" >
+                    <Link to={`/i-nostri-cani/${puppy.litter.mother?.id}`} className="text-decoration-none text-dark" >
                         <p className="mb-0 small"><strong>Madre:</strong> {puppy.litter.mother ? ` ${puppy.litter.mother.name} - ${puppy.litter.mother.pedigree_code}` : ' Informazioni non disponibili'}</p>
                     </Link>
                 </div>

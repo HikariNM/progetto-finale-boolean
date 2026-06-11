@@ -56,10 +56,10 @@
                                 </td>
                                 
                                 <td class="text-secondary">
-                                    {{ $puppy->litter->title ?? 'Nessuna cucciolata' }}
+                                    {{ $puppy->litter->title ?? 'N.D' }}
                                 </td>
                                 <td class="text-secondary">
-                                    {{ $puppy->litter->birth_date ?? 'Non ancora nata' }}
+                                    {{ $puppy->litter->birth_date ?? 'N.D' }}
                                 </td>
                                 
                                 <td class="text-secondary">

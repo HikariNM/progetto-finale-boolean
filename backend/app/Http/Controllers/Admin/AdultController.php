@@ -134,11 +134,11 @@ class AdultController extends Controller
      */
     public function edit(Adult $adult)
     {
-        $adult->load('geneticTests');
-        $titles = Title::all();
+        $adult->load('geneticTests', 'titles');
+        // $titles = Title::all();
         $geneticTests = GeneticTest::all();
 
-        return view('admin.adults.edit', compact('adult', 'titles', 'geneticTests'));
+        return view('admin.adults.edit', compact('adult', 'geneticTests'));
     }
 
     /**
